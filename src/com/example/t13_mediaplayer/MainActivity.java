@@ -2,6 +2,7 @@ package com.example.t13_mediaplayer;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,6 +33,9 @@ public class MainActivity extends ActionBarActivity {
         
         Button btnStart = (Button)findViewById(R.id.btnStart);
         Button btnStop = (Button)findViewById(R.id.btnEnd);
+        Button btnStart_new = (Button)findViewById(R.id.btnStart_new);
+        Button btnStop_new = (Button)findViewById(R.id.btnEnd_new);
+        
         btnStart.setOnClickListener(new OnClickListener() {
 			
         	@Override
@@ -53,6 +57,39 @@ public class MainActivity extends ActionBarActivity {
 				mp = null;
 			}
 		});
+        
+        
+        btnStart_new.setOnClickListener(new OnClickListener() {
+			
+        	@Override
+			public void onClick(View v) {
+			// TODO Auto-generated method stub
+				String path = Environment.getExternalStorageDirectory().toString();
+				path = path + "/Music/¸á·Ð/020-Å©·¯½¬-Àá ¸øµå´Â ¹ã (Feat. ÆÝÄ¡ (Punch)).mp3";
+				
+				mp = new MediaPlayer();
+				try{
+					mp.setDataSource(path);
+					mp.prepare();
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+				mp.start();
+			}
+		});
+        btnStop_new.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if(mp != null){
+					mp.stop();
+					mp.release();
+				}
+				mp = null;
+			}
+		});
+        
     }
 
 
